@@ -3,6 +3,9 @@ import { Box, Button, TextField, Typography } from '@mui/material';
 import { useOptimistic, useState, useTransition, type FC } from 'react';
 
 type User = { id: number; name: string };
+type OptimisticUser = User & {
+    isOptimistic?: boolean;
+};
 
 export const UseOptimistic: FC = () => {
     const [value, setValue] = useState('');
@@ -19,11 +22,14 @@ export const UseOptimistic: FC = () => {
 
     const [isPending, startTransition] = useTransition();
 
-    const [optimisticState, addOptimistic] = useOptimistic(users, (state, newValue: User) => {
-        console.log({ state });
+    const [optimisticState, addOptimistic] = useOptimistic<OptimisticUser[], OptimisticUser>(
+        users,
+        (state, newValue: OptimisticUser) => {
+            console.log({ state });
 
-        return [...state, newValue];
-    });
+            return [...state, newValue];
+        },
+    );
 
     console.log({ optimisticState, users, isPending });
 
@@ -38,7 +44,7 @@ export const UseOptimistic: FC = () => {
         };
 
         startTransition(async () => {
-            addOptimistic(newUser);
+            addOptimistic({ ...newUser, isOptimistic: true });
             await wait(2e3);
 
             startTransition(() => {
@@ -75,10 +81,10 @@ export const UseOptimistic: FC = () => {
                 Users:
             </Typography>
             <Box sx={{ display: 'flex', flexFlow: 'column', alignItems: 'center' }}>
-                {optimisticState.map(({ id, name }) => (
-                    <div key={id}>
+                {optimisticState.map(({ id, name, isOptimistic }) => (
+                    <Box key={id} sx={{ opacity: isOptimistic ? 0.5 : 1 }}>
                         {id}. {name}
-                    </div>
+                    </Box>
                 ))}
             </Box>
         </>
