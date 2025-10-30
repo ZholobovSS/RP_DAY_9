@@ -1,0 +1,82 @@
+{
+  "name": "app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "build:check": "vite-bundle-visualizer -c ./vite.config.js",
+    "eslint": "eslint . --max-warnings 0",
+    "fix:eslint": "eslint --fix ./src --max-warnings 0",
+    "fix:prettier": "prettier --ignore-path .gitignore \"./src/**/*.{ts,tsx,scss,sass,css,md,mdx}\" --write",
+    "fix:stylelint": "stylelint --fix \"./src/**/*.{scss,sass,css}\" --allow-empty-input",
+    "fix:all": "npm run fix:eslint && npm run fix:prettier && npm run fix:stylelint",
+    "preview": "vite preview",
+    "pre-commit": "lint-staged",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "npm run fix:eslint"
+    ],
+    "src/**/*.{ts,tsx,scss,sass,css,md,mdx}": [
+      "npm run fix:prettier"
+    ],
+    "src/**/*.{scss,sass,css}": [
+      "npm run fix:stylelint"
+    ]
+  },
+  "dependencies": {
+    "@emotion/react": "11.14.0",
+    "@emotion/styled": "11.14.1",
+    "@hookform/resolvers": "5.2.2",
+    "@mui/icons-material": "7.3.4",
+    "@mui/material": "7.3.4",
+    "@tanstack/react-query": "5.90.5",
+    "@zh2s/react-utils": "1.0.4",
+    "ky": "1.13.0",
+    "react": "19.2.0",
+    "react-day-picker": "9.11.1",
+    "react-dom": "19.2.0",
+    "react-hook-form": "7.65.0",
+    "react-router": "7.9.5",
+    "react-toastify": "11.0.5",
+    "zod": "4.1.12"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.38.0",
+    "@feature-sliced/eslint-config": "0.1.1",
+    "@types/node": "24.9.2",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "@typescript-eslint/eslint-plugin": "8.46.2",
+    "@typescript-eslint/parser": "8.46.2",
+    "@vitejs/plugin-react": "5.1.0",
+    "eslint": "9.38.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-boundaries": "5.1.0",
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-prettier": "5.5.4",
+    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-react-hooks": "7.0.1",
+    "eslint-plugin-react-refresh": "0.4.24",
+    "globals": "16.4.0",
+    "husky": "9.1.7",
+    "lint-staged": "16.2.6",
+    "postcss-scss": "4.0.9",
+    "prettier": "3.6.2",
+    "sass-embedded": "1.93.2",
+    "stylelint": "16.25.0",
+    "stylelint-config-recess-order": "7.4.0",
+    "stylelint-config-standard": "39.0.1",
+    "stylelint-config-standard-scss": "16.0.0",
+    "stylelint-order": "7.0.0",
+    "stylelint-prettier": "5.0.3",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "8.46.2",
+    "vite": "7.1.12",
+    "vite-bundle-visualizer": "1.2.1",
+    "vite-plugin-checker": "0.11.0"
+  }
+}
